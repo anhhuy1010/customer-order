@@ -1,0 +1,13 @@
+version: "2"
+services:
+  app:
+    container_name: customer-order
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-dev
+    volumes:
+      - ./:/go/src/github.com/anhhuy1010/customer-order
+    ports:
+      - 8005:8005
+      - 5005:5005
+
