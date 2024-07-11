@@ -1,0 +1,20 @@
+syntax ="proto3";
+option go_package ="../order";
+package order;
+service Order{
+    rpc Create(OrderRequest) returns (OrderResponse);
+}
+message OrderRequest{
+    string cart_uuid = 1;
+    string customer_name = 2;
+    int32 phone = 3;
+    string address = 4;
+}
+message OrderRsesponse {  
+	string product_uuid = 1;   
+    string uuid = 2;         
+	string product_name = 3;  
+	double product_price = 4; 
+	int32 quantity = 5;      
+	double product_total = 6;
+  }
