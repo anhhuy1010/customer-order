@@ -39,22 +39,25 @@ func (s *OrderService) Create(ctx context.Context, req *pb.CreateOrderRequest) (
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
-	orderitem := models.OrderItem{
-		Uuid:         util.GenerateUUID(),
-		OrderUuid:    order.Uuid,
-		ProductUuid:  "",
-		ProductName:  "",
-		ProductPrice: 0,
-		Quantity:     0,
-		ProductTotal: 0,
-	}
 	_, err := order.Insert()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	_, err = orderitem.Insert()
-	if err != nil {
-		fmt.Println(err.Error())
+
+	for _, item := range req.OrderItem {
+		orderItem := models.OrderItem{
+			Uuid:         util.GenerateUUID(),
+			OrderUuid:    order.Uuid,
+			ProductUuid:  item.ProductUuid,
+			ProductName:  item.ProductName,
+			ProductPrice: item.ProductPrice,
+			Quantity:     item.Quantity,
+			ProductTotal: item.ProductPrice * float64(item.Quantity),
+		}
+		_, err := orderItem.Insert()
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 	}
 	return &pb.CreateOrderResponse{
 		OrderUuid: order.Uuid,

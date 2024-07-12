@@ -17,7 +17,7 @@ type OrderItem struct {
 	ProductUuid  string  `json:"product_uuid" bson:"product_uuid"`
 	ProductName  string  `json:"product_name" bson:"product_name"`
 	ProductPrice float64 `json:"product_price" bson:"product_price"`
-	Quantity     int     `json:"quantity" bson:"quantity"`
+	Quantity     int64   `json:"quantity" bson:"quantity"`
 	ProductTotal float64 `json:"product_total" bson:"prodtuct_total"`
 }
 
