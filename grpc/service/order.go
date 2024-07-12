@@ -29,13 +29,17 @@ func (s *OrderService) Create(ctx context.Context, req *pb.CreateOrderRequest) (
 	if req.Phone == "" {
 		return nil, status.Errorf(codes.InvalidArgument, "CartUuid is required")
 	}
+	var total float64
+	for _, item := range req.OrderItem {
+		total += item.ProductPrice * float64(item.Quantity)
+	}
 	//thêm vào database
 	order := models.Orders{
 		Uuid:      util.GenerateUUID(),
 		Name:      req.CustomerName,
 		Address:   req.Address,
 		Phone:     req.Phone,
-		Total:     0,
+		Total:     total,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -43,7 +47,6 @@ func (s *OrderService) Create(ctx context.Context, req *pb.CreateOrderRequest) (
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-
 	for _, item := range req.OrderItem {
 		orderItem := models.OrderItem{
 			Uuid:         util.GenerateUUID(),

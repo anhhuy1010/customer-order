@@ -27,7 +27,6 @@ func (u *OrderItem) Model() *mongo.Collection {
 }
 func (u *OrderItem) Find(conditions map[string]interface{}, opts ...*options.FindOptions) ([]*OrderItem, error) {
 	coll := u.Model()
-
 	cursor, err := coll.Find(context.TODO(), conditions, opts...)
 	if err != nil {
 		return nil, err

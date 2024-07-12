@@ -14,6 +14,7 @@ import (
 
 func RouteInit(engine *gin.Engine) {
 	userCtr := new(controllers.UserController)
+	orderCtr := new(controllers.OrderController)
 
 	engine.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Auth Service API")
@@ -36,7 +37,7 @@ func RouteInit(engine *gin.Engine) {
 		apiV1.PUT("/users/:uuid", userCtr.Update)
 		apiV1.PUT("/users/:uuid/update-status", userCtr.UpdateStatus)
 		apiV1.DELETE("/users/:uuid", userCtr.Delete)
-
+		apiV1.POST("/orders/:uuid", orderCtr.Detail)
 	}
 	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
