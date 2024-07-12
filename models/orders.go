@@ -16,13 +16,14 @@ import (
 )
 
 type Orders struct {
-	Uuid      string    `json:"uuid" bson:"uuid"`
-	Name      string    `json:"name" bson:"name"`
-	Address   string    `json:"address" bson:"address"`
-	Phone     string    `json:"phone" bson:"phone"`
-	Total     float64   `json:"total" bson:"total"`
-	CreatedAt time.Time `json:"created_at" bson:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" bson:"updated_at"`
+	Uuid         string    `json:"uuid" bson:"uuid"`
+	Name         string    `json:"name" bson:"name"`
+	Address      string    `json:"address" bson:"address"`
+	Phone        string    `json:"phone" bson:"phone"`
+	Total        float64   `json:"total" bson:"total"`
+	CreatedAt    time.Time `json:"created_at" bson:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at" bson:"updated_at"`
+
 }
 
 func (u *Orders) Model() *mongo.Collection {
