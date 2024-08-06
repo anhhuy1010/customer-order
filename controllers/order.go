@@ -34,7 +34,7 @@ func (orderCtl OrderController) Detail(c *gin.Context) {
 	}
 	condition = bson.M{"order_uuid": reqUri.OrderUuid}
 	orderItems, err := orderItemModel.Find(condition)
-	fmt.Println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", orderItems)
+
 	if err != nil {
 		fmt.Println(err.Error())
 		c.JSON(http.StatusBadRequest, respond.ErrorCommon("Cart items not found!"))
